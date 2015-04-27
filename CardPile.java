@@ -5,7 +5,7 @@ public class CardPile
 {
    
   
-  private int ct;
+  //private int ct;
   private final int MAX_CARDS = 52;
   private ArrayList<Card> cardPile;
   
@@ -67,6 +67,14 @@ public class CardPile
    public boolean isEmpty()
    {
       return (cardPile.size() == 0);
+   }
+   public static void main(String [] args)
+   {
+   
+      CardPile pile = new CardPile();
+      pile.add(0,new Card(1,1));
+      pile.add(0,new Card(2,2));
+      
    }
 
    }

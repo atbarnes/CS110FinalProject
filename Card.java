@@ -21,8 +21,8 @@ public class Card
    public static int JACK = 11;
    public static int QUEEN = 12;
    public static int KING = 13;
-   private static int rank;
-   private static int suit;
+   private int rank;
+   private int suit;
    
    /**
    
