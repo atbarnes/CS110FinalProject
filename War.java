@@ -86,6 +86,11 @@ public class War
             
          }
          
+         if (war == true)
+         {
+            warWin = true;
+         }
+         
          roundWin = true;
          
       }
@@ -96,9 +101,12 @@ public class War
          {
             warCard = WarPile.dealCard();
             computerPile2.add(0, warCard);
-           
          }
          
+         if (war == true)
+         {
+            warWin = false;
+         }
          roundWin = false;
          
       }
@@ -139,15 +147,18 @@ public class War
          //If the cards remaining by either player are less than 0, ends game
          if (playerPile.cardsRemaining() < 2)
          {
-            
-            System.exit(0);
+            playerPile = null;
+            playerPile2 = null;
+            winner();
             
          }
          
          if (computerPile.cardsRemaining() < 2)
          {
+            computerPile = null;
+            computerPile2 = null;
+            winner();
             
-            System.exit(0);
          
          }
       
@@ -190,7 +201,30 @@ public class War
             
       }
     
-   }  
+   }
+   
+   /**
+      The myPile() method returns the amount of cards in the 
+      players pile of cards
+      @return The number of cards in the player pile
+   */
+   
+   public int myPile()
+   {
+      return playerPile2.cardsRemaining();  
+      
+   } 
+    
+   /**
+      The comPile method returns the amount of cards in the
+      computer pile of cards
+      @return The number of cards in the computer pile
+   */
+   
+   public int comPile()
+   {
+      return computerPile2.cardsRemaining();
+   }
    
    /**
       The winner method returns the winner of the game
@@ -240,21 +274,8 @@ public class War
    
    public Boolean getWarWin()
    {
-      if (warWin == true)
-      {
-         warWin = false;
-         war = false;
-         return true;
-         
-      }
-      
-      else
-      {
-         warWin = false;
-         war = false;
-         return false;
-      }
-   
+      war = false;
+      return warWin;
    
    }
    

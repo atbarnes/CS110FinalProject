@@ -27,10 +27,20 @@ public class WarCW
             System.out.println("Refilling computer deck");
          }
          //If computer or player are completely out of cards, check for winner
-         if (war.getPlayerPileCards() == 0 || war.getComputerPileCards() == 0)
+         if (war.getPlayerPileCards() <= 4 || war.getComputerPileCards() <= 4)
          {
-            System.out.println("Out of cards!");
-            System.out.println(war.winner());
+            if (war.myPile() == 0  || war.comPile() == 0)
+            {
+               System.out.println("Out of cards!");
+               if(war.winner())
+               {
+                  System.out.println("You won the game!");
+               }
+               else
+               {
+                  System.out.println("You lost the game!");
+               }
+            }
          }
          
          //Ask user to draw card. If no, ends program

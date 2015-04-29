@@ -21,6 +21,23 @@ public class Card
    public static int JACK = 11;
    public static int QUEEN = 12;
    public static int KING = 13;
+   public static String SPADESIMAGE = "s";
+   public static String CLUBSIMAGE = "c";
+   public static String HEARTSIMAGE = "h";
+   public static String DIAMONDSIMAGE = "d";
+   public static String ACEIMAGE = "ace";
+   public static String TWOIMAGE = "2";
+   public static String THREEIMAGE = "3";
+   public static String FOURIMAGE = "4";
+   public static String FIVEIMAGE = "5";
+   public static String SIXIMAGE = "6";
+   public static String SEVENIMAGE = "7";
+   public static String EIGHTIMAGE = "8";
+   public static String NINEIMAGE = "9";
+   public static String TENIMAGE = "10";
+   public static String JACKIMAGE = "jack";
+   public static String QUEENIMAGE = "queen";
+   public static String KINGIMAGE = "king";
    private int rank;
    private int suit;
    
@@ -182,7 +199,94 @@ public class Card
          
       return status;
    }
-
+   /**
+      The getImageRank method returns the ranl associated with a card for the card in
+      the cardpics folder
+      @return rank of card 
+   */
+   public static String getImageRank(Card object)
+   {
+      if (object.getRank() == 2)
+      {
+         return TWOIMAGE;
+      }
+      else if (object.getRank() == 3)
+      {
+         return THREEIMAGE;
+      }
+      else if (object.getRank() == 4)
+      {
+         return FOURIMAGE;
+      }
+      else if (object.getRank() == 5)
+      {
+         return FIVEIMAGE;
+      }
+      else if (object.getRank() == 6)
+      {
+         return SIXIMAGE;
+      }
+      else if (object.getRank() == 7)
+      {
+         return SEVENIMAGE;
+      }
+      else if (object.getRank() == 8)
+      {
+         return EIGHTIMAGE;
+      }
+      else if (object.getRank() == 9)
+      {
+         return NINEIMAGE;
+      }
+      else if (object.getRank() == 10)
+      {
+         return TENIMAGE;
+      }
+      else if (object.getRank() == 11)
+      {
+         return JACKIMAGE;
+      }
+      else if (object.getRank() == 12)
+      {
+         return QUEENIMAGE;
+      }
+      else if (object.getRank() == 12)
+      {
+         return KINGIMAGE;
+      }
+      else
+      {
+         return ACEIMAGE;
+      }
+   
+   
+   }
+   /**
+      The getImageSuit method returns the image variable associated with the suit of
+      the card for the images in the cardpics folder
+      @return the suit of the card
+   */
+   public static String getImageSuit(Card object)
+   {
+      if (object.getRank() == 1)
+      {
+         return SPADESIMAGE;
+      }
+      else if (object.getRank() == 2)
+      {
+         return CLUBSIMAGE;
+      }
+      else if (object.getRank() == 3)
+      {
+         return HEARTSIMAGE;
+      }
+      else
+      {
+         return DIAMONDSIMAGE;
+      }
+   
+   
+   }
 
 
 }
