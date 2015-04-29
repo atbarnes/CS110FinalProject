@@ -5,7 +5,7 @@ public class CardPile
 {
    
   
-  //private int ct;
+  //Inititalize variables
   private final int MAX_CARDS = 52;
   private ArrayList<Card> cardPile;
   
@@ -15,16 +15,21 @@ public class CardPile
        
    }
    
-   //Adds card to card pile
+   /**
+      The add method adds card to the card pile
+      @param i The index to add the object
+      @param object The card object to be added
+   */
    
    public void add(int i, Card object)
    {
       cardPile.add(i, object);
    }
    
-   //Removes the top card from the cardPile. Returns the card removed
-   
-
+   /**
+      Deals the top card from the pile. Returns it
+      @return The top card from the card pile
+   */
    
    public Card dealCard()
    {
@@ -33,17 +38,18 @@ public class CardPile
    }
    
    /** 
-     * Return current number of Cards in Deck
-     * @return number of Cards in Deck
-     */
+     The cardsRemaining method teturns the current number of Cards in Deck
+     @return Number of cards in the card pile
+   */
 
    public int cardsRemaining()
    {  
       return cardPile.size();
    }
+   
    /** 
-     * Randomize the order of Cards in Deck
-     */
+      The shuffle method randomizes the order of the card pile
+   */
    
    public void shuffle()
    {
@@ -60,9 +66,9 @@ public class CardPile
    }
    
    /** 
-     * Determine if Deck is empty
-     * @return true if there are no more cards, false otherwise
-     */
+     Determine if Deck is empty
+     @return true if there are no more cards, false otherwise
+   */
    
    public boolean isEmpty()
    {
@@ -77,4 +83,4 @@ public class CardPile
       
    }
 
-   }
+}

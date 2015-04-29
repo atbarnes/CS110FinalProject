@@ -8,7 +8,7 @@ public class Card
    public static int CLUBS = 2;
    public static int HEARTS = 3;
    public static int DIAMONDS = 4;
-   public static int ACE = 1;
+   public static int ACE = 14;
    public static int TWO = 2;
    public static int THREE = 3;
    public static int FOUR = 4;

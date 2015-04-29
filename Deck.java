@@ -34,7 +34,7 @@ public class Deck extends CardPile
    public void freshDeck()
    {
       
-      for (int r = Card.ACE; r<=Card.KING;r++)
+      for (int r = Card.TWO; r<=Card.ACE;r++)
       {
          for (int s= Card.SPADES; s<=Card.DIAMONDS;s++)
          {

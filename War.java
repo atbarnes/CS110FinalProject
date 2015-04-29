@@ -10,13 +10,18 @@ public class War
    private Card warCard;
    private CardPile playerPile, computerPile, playerPile2, computerPile2;
    private CardPile WarPile;
- 
-   
-//Sets up new game
+   private Boolean roundWin = false;
+   private Boolean warWin = false;
+   private Boolean war = false;
+   private Boolean playerWin = false;
+   private Boolean computerWin = false;
+/**
+   Sets up game of War. Creates new deck and deals half to each player
+*/
   
    public War()
    {
-      
+      //Creates deck, shuffles it, and creates piles for each player
       deck = new Deck();
       deck.shuffle();
       playerPile = new CardPile();
@@ -33,6 +38,7 @@ public class War
          playerPile.add(index, warCard);
             
       }
+      
       //Deals cards to computer
       for (int index = 0; index < 26; index ++) 
       {  
@@ -41,58 +47,16 @@ public class War
          computerPile.add(index, warCard); 
       }
       
-      System.out.println(computerPile.cardsRemaining());
-      System.out.println(playerPile.cardsRemaining());
-    
-      //Plays game. Compares cards and gives them to each player
-      while (!playerPile.isEmpty() || !computerPile.isEmpty())
-      {  
-         if (playerPile.cardsRemaining() <= 4)
-         {
-            getPlayerPile();
-         
-         }
-            
-         if (computerPile.cardsRemaining() <= 4)
-         {
-            getComputerPile(); 
-         }
-         
-         if (playerPile.isEmpty() || computerPile.isEmpty())
-         {
-            String winner = winner();
-            System.out.println(winner());
-         }
-         
-         Scanner keyboard = new Scanner(System.in);
-         System.out.println("Would you like to draw cards (y/n)? ");
-         String answer = keyboard.nextLine();
-         
-         
-         if (!playerPile.isEmpty() && !computerPile.isEmpty())   
-         {  
-            if (answer.equals("y"))
-            { 
-               System.out.println("draw card");
-               getCard();
-               compare(playerCard, computerCard);
-            }
-            
-            if (answer.equals("n"))
-            {
-               System.out.println("Game over");
-               System.exit(0);
-            }
-          }
-          
-          
-      }
-      
-      
-    }  
-    
-//Method to draw card from top of each pile
+   }
+   
 
+          
+          
+ 
+    
+/**
+   The getCard method draws the top card from each players hand
+*/
    public void getCard()
    {
       
@@ -104,7 +68,12 @@ public class War
       
    }
 
-//Compares cards, if one is bigger, put into that players pile.
+/**
+   The compare method compares each players card to see which is bigger. All the cards
+   in that rounds pile go to the player whose card is bigger
+   @param object1 A card object to be compared
+   @param object2 Another card object to be compared
+*/
    public void compare(Card object1, Card object2)
    {
       
@@ -117,46 +86,42 @@ public class War
             
          }
          
-         System.out.println("Player Card: " + object1 + ". Computer Card: " + object2 + ". You win!");
-         System.out.println("Player:" + playerPile.cardsRemaining());
-         System.out.println("Computer: " + computerPile.cardsRemaining());
-
+         roundWin = true;
+         
       }
       
-      else if (object2.getRank() > object1.getRank())
+      if (object2.getRank() > object1.getRank())
       {
          while(WarPile.cardsRemaining() != 0)
          {
             warCard = WarPile.dealCard();
             computerPile2.add(0, warCard);
-            
+           
          }
          
-         System.out.println("Player Card: " + object1 + ". Computer Card: " + object2 + ". You lose!");
-         System.out.println("Player: " + playerPile.cardsRemaining());
-         System.out.println("Computer: " + computerPile.cardsRemaining());
+         roundWin = false;
+         
       }
-      
-      else if (object2.getRank() == object2.getRank())
+      //If both cards are equal, a war is started
+      if (object2.getRank() == object1.getRank())
       {
-         System.out.println("Tie! Its war time");
          cardWar();
       }
       
-      else
-      {
-        System.out.println("poop");
-      }
-    
-   
-   
    }
-      //In the case of a war, this method is called
+   
+   /**
+      The cardWar method deals one card, then another one. The last card dealt by each
+      player is compared. If it is bigger, all the cards go to that respective players
+      pile 
+   */
+   
    public void cardWar()
    {
          
         if (playerPile.cardsRemaining() >= 2 && computerPile.cardsRemaining() >= 2) 
         {   
+            war = true;
             playerCard2 = playerPile.dealCard();
             computerCard2 = computerPile.dealCard(); //Sets down two player cards
             
@@ -167,32 +132,30 @@ public class War
             WarPile.add(0, computerCard2);
             WarPile.add(0, playerCard3);
             WarPile.add(0, computerCard2);
-            Scanner k = new Scanner(System.in);
-            System.out.println("Ready? (enter y): ");
-            String ans  = k.nextLine();
             
-            if (ans.equals("y"))
-            {
-               compare(playerCard3, computerCard3);
-            }
+            compare(playerCard3, computerCard3);
+            
          }
-         
+         //If the cards remaining by either player are less than 0, ends game
          if (playerPile.cardsRemaining() < 2)
          {
-            System.out.println("Computer Wins");
+            
             System.exit(0);
             
          }
          
          if (computerPile.cardsRemaining() < 2)
          {
-            System.out.println("Player Wins");
+            
             System.exit(0);
          
          }
       
    }
-   
+   /**
+      The getPlayer Pile refills your deck with 
+      the cards from your card pile
+   */
    public void getPlayerPile()
    {
       if (!playerPile2.isEmpty())
@@ -206,12 +169,12 @@ public class War
              playerPile.shuffle();
             
       }
-      
-      if (playerPile.cardsRemaining() == 0)
-      {
-         winner();
-      }
    }
+   
+   /**
+      The getComputerPile method refiils your opponents
+      deck with the cards from your card pile
+   */
    
    public void getComputerPile()
    {
@@ -226,40 +189,223 @@ public class War
          computerPile.shuffle();
             
       }
-      
-      if (computerPile.cardsRemaining() == 0)
-      {
-         winner();
-      }
+    
    }  
    
-   public String winner()
-   {
-      if (playerPile.isEmpty() && playerPile2.isEmpty())
-      {
-         return "You lost the game!";
-      }
-      else if (computerPile.isEmpty() && computerPile2.isEmpty())
-      {
-         return "You win the game!";
-      }
-      else
-      {
-         return "Your program doesn't work";
-      }
-   }
+   /**
+      The winner method returns the winner of the game
+      @return The winner of the game
+   */
    
-   
-   public static void main(String [] args)
+   public Boolean winner()
    {
-      War war = new War();
+      if (playerPile.isEmpty())
+      {
+         computerWin = true;
+         return computerWin;
+      }
+      else 
+      {
+         playerWin = true;
+         return playerWin;
+      }
       
    }
    
+   /**
+      The getRoundWin method returns the winner of a round
+      @return The winner of a round
+   */
    
-
+   public Boolean getRoundWin()
+   {
+      if (roundWin == true)
+      {
+         return true;
+         
+      }    
    
- }
+      else
+      {
+      
+         return false;
+      }
+   
+   }
+   
+   /**
+      The getWarWin method returns the winner of a war
+      @return The winner of a war
+   */
+   
+   public Boolean getWarWin()
+   {
+      if (warWin == true)
+      {
+         warWin = false;
+         war = false;
+         return true;
+         
+      }
+      
+      else
+      {
+         warWin = false;
+         war = false;
+         return false;
+      }
+   
+   
+   }
+   
+   /**
+      The getPlayerPileCards method returns the amount
+      of cards remaining in the players deck
+      @return The cards remaining in the players hand
+   */
+   
+   public int getPlayerPileCards()
+   {
+      return playerPile.cardsRemaining();
+   
+   }
+   
+   /**
+      The getComputerPileCards method returns the amount of
+      cards remaining in the computers deck
+      @return The cards remaining in the players hand
+   */
+   
+   public int getComputerPileCards()
+   {
+      return computerPile.cardsRemaining();
+   
+   }
+   
+   /**
+      The getWar method returns the status of the war variable
+      @return If true, there is a war. If false, not a war
+   */
+   
+   public Boolean getWar()
+   {
+      return war;
+   }
+   
+   /**
+      The getPlayer Card method return the players card
+      @return The players card
+   */
+   
+   public Card getPlayerCard()
+   {
+      return playerCard;
+  
+   }
+   
+   /**
+      The getComputerCard method returns the computers card
+      @return The computers card
+   */
+   
+   public Card getComputerCard()
+   {
+      return computerCard;
+   
+   }
+   
+   /**
+      The getPlayerWarCard method returns the players card
+      that is used to compare in a war
+      @return The player card to be compared in a war   
+   */
+   
+   public Card getPlayerWarCard()
+   {
+      return playerCard3;
+   
+   }
+   
+   /**
+      The getComputerWarCard method returns the computers card
+      that is used to compare in a war
+      @return The computer card to be compared in a war
+   */
+   
+   public Card getComputerWarCard()
+   {
+      return computerCard3;
+   }
+   
+   /**
+      The getPlayerRank method returns the rank of the
+      players card
+      @return The rank of the player card
+   */
+   
+   public int getPlayerRank()
+   {
+      return playerCard.getRank();
+   }
+   
+   /**
+      The getComputerRank method returns the rank of the 
+      computers card
+      @return The rank of the computer card
+   */
+   
+   public int getComputerRank()
+   {
+      return computerCard.getRank();
+   }
+   
+   /**
+      The playerCardToString method returns a string representation
+      of the player card
+      @return A string representation of the players card
+   */
+   
+   public String playerCardToString()
+   {
+      return playerCard.toString();
+   }
+   
+   /**
+      The computerCardToString method returns a string representation
+      of the computer card
+      @return A string representaiton of the computers card
+   */
+   
+   public String computerCardToString()
+   {
+      return computerCard.toString();
+   }
+   
+   /**
+      The playerWarCardToString method returns a string represenation
+      of the players war card to be compared
+      @return A string representation of the players war card to be compared
+   */
+   
+   public String playerWarCardToString()
+   {
+      return playerCard3.toString();
+   }
+   
+   /**
+      The computerWarCardToString method returns a string representation 
+      oft the computers war card to be comared
+      @return A string representation of the computers war card to be compared
+   */
+   
+   public String computerWarCardToString()
+   {
+      return computerCard3.toString();
+   }
+   
+   
+   
+}
 
 
 
